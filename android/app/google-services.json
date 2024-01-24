@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "639592067343",
+    "firebase_url": "https://flutter-topcare-default-rtdb.firebaseio.com",
+    "project_id": "flutter-topcare",
+    "storage_bucket": "flutter-topcare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639592067343:android:9d62baa349b96b510c0e7a",
+        "android_client_info": {
+          "package_name": "com.example.topcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639592067343-q6bvikq0gtdpk1k53isqcq0rshoa785t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.topcare",
+            "certificate_hash": "f2752f7ba153cb3b3c53e892efe3d0647b11ebc2"
+          }
+        },
+        {
+          "client_id": "639592067343-qvd47ikasd7e2ij3gegsmsmmvjvdft9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9sO5YIsA3Xzgc_14rvdi7-ZvDkz08qH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639592067343-qvd47ikasd7e2ij3gegsmsmmvjvdft9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
