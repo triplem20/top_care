@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -13,7 +15,7 @@ class CartView extends StatelessWidget {
         backgroundColor: Colors.teal,
         elevation: 5,
         title: const Text(
-          "Requests History",
+          "Cart",
           style: TextStyle(
               fontSize: 20, fontFamily: 'primary', color: Colors.white),
         ),
@@ -26,7 +28,7 @@ class CartView extends StatelessWidget {
               height: 35,
             ),
             Container(
-              height: 410,
+              height: 1310,
               width: 500,
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
@@ -108,28 +110,138 @@ class CartView extends StatelessWidget {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  alignment: Alignment.center,
-                                  width: 110,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: snap.data!.docs[index]['status'] ==
-                                            'in Progress'
-                                        ? Colors.yellow.shade900
-                                        : snap.data!.docs[index]['status'] ==
-                                                'Accepted'
-                                            ? CupertinoColors.activeBlue
-                                            : Colors.red,
-                                  ),
-                                  child: const Text(
-                                    'in Progress',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'primary',
-                                        fontSize: 18),
-                                  ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(left: 20),
+                                      alignment: Alignment.center,
+                                      width: 110,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: snap.data!.docs[index]
+                                                    ['status'] ==
+                                                'in Progress'
+                                            ? Colors.yellow.shade900
+                                            : snap.data!.docs[index]
+                                                        ['status'] ==
+                                                    'Accepted'
+                                                ? CupertinoColors.activeBlue
+                                                : snap.data!.docs[index]
+                                                            ['status'] ==
+                                                        'Canceled'
+                                                    ? Colors.grey
+                                                    : Colors.red,
+                                      ),
+                                      child: Text(
+                                        snap.data!.docs[index]['status'],
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'primary',
+                                            fontSize: 18),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    IconButton(
+                                        onPressed: () async {
+                                          Get.dialog(
+                                            Center(
+                                              child: Container(
+                                                height: 150.h,
+                                                width: 250.w,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 10.h,
+                                                    ),
+                                                    Text(
+                                                      'Cancel Request ?',
+                                                      style: TextStyle(
+                                                          fontFamily: 'primary',
+                                                          fontSize: 19),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 35.h,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 10.w,
+                                                        ),
+                                                        ElevatedButton(
+                                                            style: ElevatedButton.styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10))),
+                                                            onPressed:
+                                                                () async {
+                                                              var id = snap
+                                                                  .data!
+                                                                  .docs[index]
+                                                                      ['id']
+                                                                  .toString();
+                                                              await FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      'Requests')
+                                                                  .doc(id)
+                                                                  .update({
+                                                                'status':
+                                                                    'Canceled',
+                                                              });
+                                                            },
+                                                            child: Text(
+                                                              'Confirm',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .red
+                                                                      .shade400,
+                                                                  fontFamily:
+                                                                      'primary',
+                                                                  fontSize: 19),
+                                                            )),
+                                                        SizedBox(
+                                                          width: 20.w,
+                                                        ),
+                                                        ElevatedButton(
+                                                            style: ElevatedButton.styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10))),
+                                                            onPressed: () {
+                                                              Get.back();
+                                                            },
+                                                            child: Text(
+                                                              'Cancel',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontFamily:
+                                                                      'primary',
+                                                                  fontSize: 19),
+                                                            ))
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.remove_circle,
+                                          color: Colors.red.shade900,
+                                        ))
+                                  ],
                                 ),
                               ],
                             ),

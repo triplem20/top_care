@@ -1,5 +1,6 @@
 // ignore: file_names
 class ServiceModel {
+  String? id;
   String? title;
   String? category;
   String? image;
@@ -7,10 +8,16 @@ class ServiceModel {
   String? description;
 
   ServiceModel(
-      {this.title, this.category, this.description, this.image, this.price});
+      {this.id,
+      this.title,
+      this.category,
+      this.description,
+      this.image,
+      this.price});
 
   ServiceModel.fromJson(map) {
     if (map == null) return;
+    id = map['id'];
     title = map['title'];
     image = map['image'];
     price = map['price'];
@@ -21,6 +28,7 @@ class ServiceModel {
   // Function To convert data To json
   toJson() {
     return {
+      'id': id,
       'title': title,
       'image': image,
       'price': price,

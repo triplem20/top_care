@@ -60,6 +60,7 @@ class HomeView extends StatelessWidget {
                       onTap: () {
                         Get.to(() => Request(
                             serviceModel: ServiceModel(
+                                id: data.docs[index]['id'],
                                 title: data.docs[index]['title'],
                                 image: data.docs[index]['image'],
                                 description: data.docs[index]['Description'],

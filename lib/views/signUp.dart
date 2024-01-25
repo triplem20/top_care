@@ -70,7 +70,7 @@ class SignUpView extends StatelessWidget {
                             color: Colors.grey.shade800,
                           ),
                           label: const Text(
-                            'Address',
+                            'Adress',
                             style: TextStyle(fontFamily: 'primary'),
                           ),
                           border: OutlineInputBorder(

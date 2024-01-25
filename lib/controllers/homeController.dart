@@ -18,8 +18,8 @@ class HomeViewModel extends GetxController {
       btnCNTL.start();
       userDoc =
           await database.collection('users').doc(auth.currentUser!.uid).get();
-      await _requests.doc(DateTime.now().toString()).set({
-        'id': DateTime.now().toString(),
+      await _requests.doc(DateTime.now().toString().substring(0, 16)).set({
+        'id': DateTime.now().toString().substring(0, 16),
         'title': serviceModel.title,
         'Description': serviceModel.description,
         'Price': serviceModel.price,
@@ -30,6 +30,7 @@ class HomeViewModel extends GetxController {
         'email': userDoc['email'],
         'date': date,
         'status': 'in Progress',
+        'serviceid': serviceModel.id
       });
       btnCNTL.stop();
       EasyLoading.showSuccess('Request added successfully');
